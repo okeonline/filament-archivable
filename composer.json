@@ -31,8 +31,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Okeonline\\FilamentArchivable\\": "src/",
-            "Okeonline\\FilamentArchivable\\Database\\Factories\\": "database/factories/"
+            "Okeonline\\FilamentArchivable\\": "src/"
         }
     },
     "autoload-dev": {
@@ -70,10 +69,7 @@
         "laravel": {
             "providers": [
                 "Okeonline\\FilamentArchivable\\FilamentArchivableServiceProvider"
-            ],
-            "aliases": {
-                "FilamentArchivable": "Okeonline\\FilamentArchivable\\Facades\\FilamentArchivable"
-            }
+            ]
         }
     },
     "minimum-stability": "dev",
