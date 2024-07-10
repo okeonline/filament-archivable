@@ -1,12 +1,12 @@
 <?php
 
-namespace VendorName\Skeleton\Commands;
+namespace Okeonline\FilamentArchivable\Commands;
 
 use Illuminate\Console\Command;
 
-class SkeletonCommand extends Command
+class FilamentArchivableCommand extends Command
 {
-    public $signature = 'skeleton';
+    public $signature = 'filament-archivable';
 
     public $description = 'My command';
 
