@@ -2,9 +2,9 @@
 
 namespace Okeonline\FilamentArchivable;
 
+use Okeonline\FilamentArchivable\Commands\FilamentArchivableCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Okeonline\FilamentArchivable\Commands\FilamentArchivableCommand;
 
 class FilamentArchivableServiceProvider extends PackageServiceProvider
 {
