@@ -15,5 +15,5 @@ return [
             'without_archived' => 'Zonder gearchiveerde records',
 
         ],
-    ]
+    ],
 ];

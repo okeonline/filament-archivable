@@ -2,8 +2,6 @@
 
 namespace Okeonline\FilamentArchivable;
 
-use Filament\Tables\Table;
-use LaravelArchivable\Scopes\ArchivableScope;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
