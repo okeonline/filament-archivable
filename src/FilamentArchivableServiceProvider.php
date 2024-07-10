@@ -6,7 +6,6 @@ use Filament\Tables\Table;
 use LaravelArchivable\Scopes\ArchivableScope;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Okeonline\FilamentArchivable\Commands\FilamentArchivableCommand;
 
 class FilamentArchivableServiceProvider extends PackageServiceProvider
 {

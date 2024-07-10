@@ -3,8 +3,8 @@
 namespace Okeonline\FilamentArchivable\Tests;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Orchestra\Testbench\TestCase as Orchestra;
 use Okeonline\FilamentArchivable\FilamentArchivableServiceProvider;
+use Orchestra\Testbench\TestCase as Orchestra;
 
 class TestCase extends Orchestra
 {
