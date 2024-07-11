@@ -5,7 +5,6 @@ namespace Okeonline\FilamentArchivable\Tests\TestResources;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
-use Filament\Resources\Pages\ListRecords;
 use Filament\Resources\Resource;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
@@ -26,7 +25,7 @@ class ModelWithArchivableTraitResource extends Resource
         return $form
             ->schema([
                 TextInput::make('name'),
-                DatePicker::make('archived_at')
+                DatePicker::make('archived_at'),
             ]);
     }
 
@@ -36,7 +35,7 @@ class ModelWithArchivableTraitResource extends Resource
             ->columns([
                 TextColumn::make('name'),
                 TextColumn::make('archived_at')
-                    ->dateTime()
+                    ->dateTime(),
             ])
             ->filters([
                 ArchivedFilter::make(),

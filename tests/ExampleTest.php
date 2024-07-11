@@ -1,8 +1,5 @@
 <?php
 
-use Filament\Facades\Filament;
-use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Okeonline\FilamentArchivable\FilamentArchivable;
 use Okeonline\FilamentArchivable\FilamentArchivablePlugin;
 use Okeonline\FilamentArchivable\Tables\Actions\ArchiveAction;
@@ -19,7 +16,7 @@ it('can test', function () {
     expect(true)->toBeTrue();
 });
 
-it('is a valid plugin', function() {
+it('is a valid plugin', function () {
     $plugin = new FilamentArchivablePlugin();
 
     expect($plugin->getId())
@@ -30,14 +27,14 @@ it('is a valid plugin', function() {
 
 });
 
-it('registers archivedRecordClasses macro to Table', function() {
+it('registers archivedRecordClasses macro to Table', function () {
     // cant find a good way to test macros
 })->todo();
 
 it('shows items when Archivable-trait is used, unfiltered, so only the unarchived items', function () {
     $modelWithArchivedAt = ModelWithArchivableTrait::factory()->count(1)->create(['archived_at' => now()]);
     $modelWithoutArchivedAt = ModelWithArchivableTrait::factory()->count(1)->create(['archived_at' => null]);
- 
+
     livewire(ModelWithArchivableTraitResource\Pages\ListPage::class)
         ->assertSuccessful()
         ->assertCanSeeTableRecords($modelWithoutArchivedAt)
@@ -45,7 +42,7 @@ it('shows items when Archivable-trait is used, unfiltered, so only the unarchive
         ->assertCountTableRecords(1);
 });
 
-it('shows all models when Archivable-trait is not used', function(){
+it('shows all models when Archivable-trait is not used', function () {
     $modelWithArchivedAt = ModelWithoutArchivableTrait::factory()->count(1)->create(['archived_at' => now()]);
     $modelWithoutArchivedAt = ModelWithoutArchivableTrait::factory()->count(1)->create(['archived_at' => null]);
     $both = $modelWithArchivedAt->merge($modelWithoutArchivedAt);
@@ -53,10 +50,10 @@ it('shows all models when Archivable-trait is not used', function(){
     livewire(ModelWithoutArchivableTraitResource\Pages\ListPage::class)
         ->assertSuccessful()
         ->assertCanSeeTableRecords($both)
-        ->assertCountTableRecords(2); 
+        ->assertCountTableRecords(2);
 });
 
-it('does not show (un)ArchivedActions when Archivable-trait is not used', function(){
+it('does not show (un)ArchivedActions when Archivable-trait is not used', function () {
     $modelWithArchivedAt = ModelWithoutArchivableTrait::factory()->count(1)->create(['archived_at' => now()]);
     $modelWithoutArchivedAt = ModelWithoutArchivableTrait::factory()->count(1)->create(['archived_at' => null]);
     $both = $modelWithArchivedAt->merge($modelWithoutArchivedAt);
@@ -70,7 +67,7 @@ it('does not show (un)ArchivedActions when Archivable-trait is not used', functi
 });
 
 // filters
-it('filters rows based on ArchiveFilter = blank', function(){
+it('filters rows based on ArchiveFilter = blank', function () {
 
     $modelWithArchivedAt = ModelWithArchivableTrait::factory()->count(1)->create(['archived_at' => now()]);
     $modelWithoutArchivedAt = ModelWithArchivableTrait::factory()->count(1)->create(['archived_at' => null]);
@@ -84,7 +81,7 @@ it('filters rows based on ArchiveFilter = blank', function(){
 
 });
 
-it('filters rows based on ArchiveFilter = true', function(){
+it('filters rows based on ArchiveFilter = true', function () {
 
     $modelWithArchivedAt = ModelWithArchivableTrait::factory()->count(1)->create(['archived_at' => now()]);
     $modelWithoutArchivedAt = ModelWithArchivableTrait::factory()->count(1)->create(['archived_at' => null]);
@@ -98,7 +95,7 @@ it('filters rows based on ArchiveFilter = true', function(){
 
 });
 
-it('filters rows based on ArchiveFilter = false', function(){
+it('filters rows based on ArchiveFilter = false', function () {
 
     $modelWithArchivedAt = ModelWithArchivableTrait::factory()->count(1)->create(['archived_at' => now()]);
     $modelWithoutArchivedAt = ModelWithArchivableTrait::factory()->count(1)->create(['archived_at' => null]);
@@ -111,9 +108,8 @@ it('filters rows based on ArchiveFilter = false', function(){
 
 });
 
-
 // actions
-it('shows row-action archive, only on unarchived rows', function(){
+it('shows row-action archive, only on unarchived rows', function () {
 
     $modelWithoutArchivedAt = ModelWithArchivableTrait::factory()->count(1)->create(['archived_at' => null]);
 
@@ -127,7 +123,7 @@ it('shows row-action archive, only on unarchived rows', function(){
 
 });
 
-it('shows row-action unarchive, only on archived rows', function(){
+it('shows row-action unarchive, only on archived rows', function () {
 
     $modelWithArchivedAt = ModelWithArchivableTrait::factory()->count(1)->create(['archived_at' => now()]);
 
@@ -142,7 +138,7 @@ it('shows row-action unarchive, only on archived rows', function(){
 
 });
 
-it('archives the model if ArchiveAction is called', function(){
+it('archives the model if ArchiveAction is called', function () {
 
     $modelWithoutArchivedAt = ModelWithArchivableTrait::factory()->count(1)->create(['archived_at' => null]);
 
@@ -159,7 +155,7 @@ it('archives the model if ArchiveAction is called', function(){
         ->not->toBe(null);
 });
 
-it('unarchives the model if UnarchiveAction is called', function(){
+it('unarchives the model if UnarchiveAction is called', function () {
 
     $modelWithArchivedAt = ModelWithArchivableTrait::factory()->count(1)->create(['archived_at' => now()]);
 
@@ -177,7 +173,7 @@ it('unarchives the model if UnarchiveAction is called', function(){
         ->toBe(null);
 });
 
-it('can set default archived-table-row classes', function(){
+it('can set default archived-table-row classes', function () {
     $plugin = new FilamentArchivablePlugin();
 
     expect(FilamentArchivable::$archivedRecordClasses)
@@ -190,6 +186,6 @@ it('can set default archived-table-row classes', function(){
         ->toBe(['bg-red-100']);
 });
 
-it('can set the recordClasses specific for archived records', function() {
+it('can set the recordClasses specific for archived records', function () {
     // cant find a good way to test this
 })->todo();

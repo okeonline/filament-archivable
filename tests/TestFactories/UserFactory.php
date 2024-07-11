@@ -3,8 +3,6 @@
 namespace Okeonline\FilamentArchivable\Tests\TestFactories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
 use Okeonline\FilamentArchivable\Tests\TestModels\User;
 
 class UserFactory extends Factory

@@ -10,7 +10,7 @@ use Okeonline\FilamentArchivable\Tests\TestFactories\ModelWithoutArchivableTrait
 class ModelWithoutArchivableTrait extends Model
 {
     use HasFactory;
-    
+
     protected $table = 'without';
 
     protected static function newFactory(): Factory

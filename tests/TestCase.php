@@ -13,7 +13,6 @@ use Filament\Notifications\NotificationsServiceProvider;
 use Filament\Support\SupportServiceProvider;
 use Filament\Tables\TablesServiceProvider;
 use Filament\Widgets\WidgetsServiceProvider;
-use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Schema\Blueprint;
 use Livewire\LivewireServiceProvider;
 use Okeonline\FilamentArchivable\FilamentArchivableServiceProvider;
@@ -65,7 +64,7 @@ class TestCase extends Orchestra
         ]);
         $app['config']->set('view.paths', [
             ...$app['config']->get('view.paths'),
-            __DIR__ . '/../resources/views',
+            __DIR__.'/../resources/views',
         ]);
 
         $schema = $app['db']->connection()->getSchemaBuilder();
@@ -75,7 +74,7 @@ class TestCase extends Orchestra
             $table->string('email');
             $table->timestamps();
         });
-        
+
         $schema->create('with', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
