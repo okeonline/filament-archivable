@@ -13,7 +13,7 @@ class UnArchiveAction extends Action
 
     public static function getDefaultName(): ?string
     {
-        return 'restore';
+        return 'unarchive';
     }
 
     protected function setUp(): void

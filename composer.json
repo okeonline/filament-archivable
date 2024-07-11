@@ -17,6 +17,7 @@
     ],
     "require": {
         "php": "^8.2",
+        "filament/filament": "^3.2",
         "illuminate/contracts": "^10.0||^11.0",
         "joelbutcher/laravel-archivable": "^1.4",
         "spatie/laravel-package-tools": "^1.16"
@@ -27,7 +28,9 @@
         "orchestra/testbench": "^9.0.0||^8.22.0",
         "pestphp/pest": "^2.34",
         "pestphp/pest-plugin-arch": "^2.7",
-        "pestphp/pest-plugin-laravel": "^2.3"
+        "pestphp/pest-plugin-laravel": "^2.3",
+        "pestphp/pest-plugin-livewire": "^2.1",
+        "pestphp/pest-plugin-watch": "^2.1"
     },
     "autoload": {
         "psr-4": {

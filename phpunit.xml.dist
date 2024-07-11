@@ -20,8 +20,14 @@
             <directory>tests</directory>
         </testsuite>
     </testsuites>
+    <php>
+        <env name="CACHE_DRIVER" value="array" />
+        <!-- APP_KEY required for Passport client -->
+        <env name="APP_KEY" value="base64:W99w+5JYz8SMGf5sx17gmPR6uoNCtWiEVc+9ou8iGEg=" />
+        <ini name="memory_limit" value="512M" />
+    </php>
     <logging>
-        <junit outputFile="build/report.junit.xml"/>
+        <junit outputFile="build/report.junit.xml" />
     </logging>
     <source>
         <include>
