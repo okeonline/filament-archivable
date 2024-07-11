@@ -10,14 +10,13 @@ use Okeonline\FilamentArchivable\Tests\TestFactories\ModelWithArchivableTraitFac
 
 class ModelWithArchivableTrait extends Model
 {
-    use HasFactory;
     use Archivable;
-    
+    use HasFactory;
+
     protected $table = 'with';
 
     protected static function newFactory(): Factory
     {
         return ModelWithArchivableTraitFactory::new();
     }
-
 }
