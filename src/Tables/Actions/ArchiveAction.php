@@ -52,6 +52,7 @@ class ArchiveAction extends Action
             if (! $result) {
                 // @codeCoverageIgnoreStart
                 $this->failure();
+
                 return;
                 // @codeCoverageIgnoreEnd
             }

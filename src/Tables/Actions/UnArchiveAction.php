@@ -41,6 +41,7 @@ class UnArchiveAction extends Action
             if (! method_exists($record, 'unArchive')) {
                 // @codeCoverageIgnoreStart
                 $this->failure();
+
                 return;
                 // @codeCoverageIgnoreEnd
             }
@@ -50,6 +51,7 @@ class UnArchiveAction extends Action
             if (! $result) {
                 // @codeCoverageIgnoreStart
                 $this->failure();
+
                 return;
                 // @codeCoverageIgnoreEnd
             }
