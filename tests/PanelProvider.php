@@ -31,7 +31,6 @@ class PanelProvider extends FilamentPanelProvider
             ->registration()
             ->passwordReset()
             ->emailVerification()
-            // ->discoverResources(in: base_path('tests/TestResources'), for: 'Okeonline\\FilamentArchivable\\Tests\\TestResources')
             ->resources([
                 ModelWithArchivableTraitResource::class,
                 ModelWithoutArchivableTraitResource::class,

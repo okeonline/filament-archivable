@@ -64,8 +64,8 @@ it('does not show (un)ArchivedActions when Archivable-trait is not used', functi
         ->assertSuccessful()
         ->assertCanSeeTableRecords($both)
         ->assertCountTableRecords(2)
-        ->assertTableActionNotMounted(UnArchiveAction::class, $modelWithArchivedAt->nth(1))
-        ->assertTableActionNotMounted(ArchiveAction::class, $modelWithArchivedAt->nth(2));
+        ->assertTableActionDoesNotExist(UnArchiveAction::class, record: $modelWithArchivedAt->nth(1))
+        ->assertTableActionDoesNotExist(ArchiveAction::class, record: $modelWithArchivedAt->nth(2));
 });
 
 // filters
@@ -121,8 +121,8 @@ it('shows row-action archive, only on unarchived rows', function () {
         ->assertSuccessful()
         ->assertCanSeeTableRecords($modelWithoutArchivedAt)
         ->assertCountTableRecords(1)
-        ->assertTableActionExists(ArchiveAction::class)
-        ->assertTableActionDoesNotExist(ArchiveAction::class);
+        ->assertTableActionExists(ArchiveAction::class, record: $modelWithoutArchivedAt->first())
+        ->assertTableActionDoesNotExist(ArchiveAction::class, record: $modelWithoutArchivedAt->first());
 
 });
 
@@ -135,8 +135,8 @@ it('shows row-action unarchive, only on archived rows', function () {
         ->assertSuccessful()
         ->assertCanSeeTableRecords($modelWithArchivedAt)
         ->assertCountTableRecords(1)
-        ->assertTableActionExists(UnArchiveAction::class)
-        ->assertTableActionDoesNotExist(ArchiveAction::class);
+        ->assertTableActionExists(UnArchiveAction::class, record: $modelWithArchivedAt->first())
+        ->assertTableActionDoesNotExist(ArchiveAction::class, record: $modelWithArchivedAt->first());
 
 });
 
@@ -149,7 +149,7 @@ it('archives the model if ArchiveAction is called', function () {
         ->assertSuccessful()
         ->assertCanSeeTableRecords($modelWithoutArchivedAt)
         ->assertCountTableRecords(1)
-        ->assertTableActionExists(ArchiveAction::class)
+        ->assertTableActionExists(ArchiveAction::class, record: $modelWithoutArchivedAt->first())
 
         ->callTableAction(ArchiveAction::class, $modelWithoutArchivedAt->first())
         ->assertHasNoTableActionErrors();
@@ -167,8 +167,8 @@ it('unarchives the model if UnarchiveAction is called', function () {
         ->assertSuccessful()
         ->assertCanSeeTableRecords($modelWithArchivedAt)
         ->assertCountTableRecords(1)
-        ->assertTableActionExists(UnArchiveAction::class)
-        ->assertTableActionDoesNotExist(ArchiveAction::class)
+        ->assertTableActionExists(UnArchiveAction::class, record: $modelWithArchivedAt->first())
+        ->assertTableActionDoesNotExist(ArchiveAction::class, record: $modelWithArchivedAt->first())
 
         ->callTableAction(UnArchiveAction::class, $modelWithArchivedAt->first())
         ->assertHasNoTableActionErrors();
@@ -196,8 +196,8 @@ it('can set default archived-table-row classes', function () {
         ->assertSuccessful()
         ->assertCanSeeTableRecords($modelWithArchivedAt)
         ->assertCountTableRecords(1)
-        ->assertTableActionExists(UnArchiveAction::class)
-        ->assertTableActionDoesNotExist(ArchiveAction::class)
+        ->assertTableActionExists(UnArchiveAction::class, record: $modelWithArchivedAt->first())
+        ->assertTableActionDoesNotExist(ArchiveAction::class, record: $modelWithArchivedAt->first())
         ->assertSee('opacity-25');
 });
 
@@ -241,8 +241,8 @@ it('can ignore default archived-table-row classes when specificly defined on the
         ->assertSuccessful()
         ->assertCanSeeTableRecords($modelWithArchivedAt)
         ->assertCountTableRecords(1)
-        ->assertTableActionExists(UnArchiveAction::class)
-        ->assertTableActionDoesNotExist(ArchiveAction::class)
+        ->assertTableActionExists(UnArchiveAction::class, record: $modelWithArchivedAt->first())
+        ->assertTableActionDoesNotExist(ArchiveAction::class, record: $modelWithArchivedAt->first())
         ->assertDontSee('opacity-25')
         ->assertDontSee('bg-red-300');
 

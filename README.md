@@ -6,7 +6,16 @@
 [![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/okeonline/filament-archivable/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/okeonline/filament-archivable/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/okeonline/filament-archivable.svg?style=flat-square)](https://packagist.org/packages/okeonline/filament-archivable)
 
-Filament plugin to archive and unarchive table records (models) based on the [Laravel Archivable plugin by Joe Butcher](https://github.com/joelbutcher/laravel-archivable). This filament plugin adds an [ArchiveAction](#archiveunarchive-actions), an [UnArchiveAction](#archiveunarchive-actions) and a [ArchivedFilter](#filtering) to your resource tables. It's also possible to [add custom row-classes for archived records](#add-custom-classes-to-archived-rows).
+Filament plugin for archiving and unarchiving table records (eloquent models) based on the [Laravel Archivable package by Joe Butcher](https://github.com/joelbutcher/laravel-archivable). 
+
+This filament plugin adds an [ArchiveAction](#archiveunarchive-actions), an [UnArchiveAction](#archiveunarchive-actions) and a [ArchivedFilter](#filtering) to your resource tables. It's also possible to [add custom row-classes for archived records](#add-custom-classes-to-archived-rows).
+
+## Requirements
+
+- PHP ^8.3
+- Laravel ^11.0
+- Filament ^3.0
+- Laravel Archivable ^1.4 (installed with this plugin)
 
 ## Installation
 
@@ -30,7 +39,7 @@ class AppPanelProvider extends PanelProvider
 }
 ```
 
-This package automatically installs the [Laravel Archivable plugin by Joe Butcher](https://github.com/joelbutcher/laravel-archivable).
+This filament plugin automatically installs the [Laravel Archivable package by Joe Butcher](https://github.com/joelbutcher/laravel-archivable).
 
 Follow his installation instructions, which -in short- instructs:
 
@@ -63,13 +72,13 @@ class UserResource extends Resource
 }
 ```
 
-It will show the ```ArchiveAction``` on records that aren't archived, and will show the ```UnarchiveAction``` on those which are currently archived:
+It will show the ```ArchiveAction``` on records that aren't archived, and will show the ```UnArchiveAction``` on those which are currently archived:
 
 ![Actions](assets/screen-actions.png)
 
 > You should add **both** actions to the same table. The action itself wil determine if it should be shown on the record.
 
-The actions are normal table actions, similar to the [Delete](https://filamentphp.com/docs/3.x/actions/prebuilt-actions/delete) and [Restore](https://filamentphp.com/docs/3.x/actions/prebuilt-actions/restore) actions of Filament. You can add all features that are described in the [Filament Table Actions Documentation](https://filamentphp.com/docs/3.x/tables/actions), like:
+The actions are normal table actions, similar to the [Delete](https://filamentphp.com/docs/3.x/actions/prebuilt-actions/delete) and [Restore](https://filamentphp.com/docs/3.x/actions/prebuilt-actions/restore) actions of FilamentPHP. You can add all features that are described in the [FilamentPHP Table Actions Documentation](https://filamentphp.com/docs/3.x/tables/actions), like:
 
 - ```hiddenLabel()```
 - ```tooltip()```
@@ -133,7 +142,16 @@ public static function table(Table $table): Table
 - en - English
 - nl - Dutch
 
+You can publish and change the language files by running:
+
+```bash
+php artisan vendor:publish --tag=filament-archivable-translations
+```
+
 ## Testing
+
+Minimal dev-requirement:
+- filament/tables ^3.2.57
 
 ```bash
 composer test

@@ -11,8 +11,6 @@ class FilamentArchivableServiceProvider extends PackageServiceProvider
     {
         $package
             ->name('filament-archivable')
-            ->hasConfigFile()
-            ->hasViews()
             ->hasTranslations();
     }
 }

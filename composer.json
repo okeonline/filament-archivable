@@ -4,7 +4,13 @@
     "keywords": [
         "OKE Online",
         "laravel",
-        "filament-archivable"
+        "filament-archivable",
+        "laravel",
+        "filament",
+        "filamentphp",
+        "laravel-eloquent",
+        "eloquent",
+        "filament-plugins"
     ],
     "homepage": "https://github.com/okeonline/filament-archivable",
     "license": "MIT",
@@ -16,13 +22,16 @@
         }
     ],
     "require": {
-        "php": "^8.2",
+        "php": "^8.3",
         "filament/filament": "^3.2",
+        "illuminate/support": "^11.0",
+        "illuminate/database": "^11.0",
         "illuminate/contracts": "^10.0||^11.0",
         "joelbutcher/laravel-archivable": "^1.4",
         "spatie/laravel-package-tools": "^1.16"
     },
     "require-dev": {
+        "filament/tables": "^3.2.57",
         "laravel/pint": "^1.14",
         "nunomaduro/collision": "^8.1.1||^7.10.0",
         "orchestra/testbench": "^9.0.0||^8.22.0",
