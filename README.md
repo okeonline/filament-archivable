@@ -1,11 +1,11 @@
-# Filament plugin to archive, unarchive and filter table records
+# Filament plugin to archive, unarchive and filter records
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/okeonline/filament-archivable.svg?style=flat-square)](https://packagist.org/packages/okeonline/filament-archivable)
 [![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/okeonline/filament-archivable/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/okeonline/filament-archivable/actions?query=workflow%3Arun-tests+branch%3Amain)
 [![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/okeonline/filament-archivable/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/okeonline/filament-archivable/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/okeonline/filament-archivable.svg?style=flat-square)](https://packagist.org/packages/okeonline/filament-archivable)
 
-Filament plugin to archive and unarchive table records (models) based on the Laravel Archivable plugin by Joe Butcher. It adds an [ArchiveAction](#archiveunarchive-actions), [UnArchiveAction](#archiveunarchive-actions) and a [ArchivedFilter](#filtering) to your resource tables. It's also possible to [add custom row-classes for archived records](#add-custom-classes-to-archived-rows).
+Filament plugin to archive and unarchive table records (models) based on the [Laravel Archivable plugin by Joe Butcher](https://github.com/joelbutcher/laravel-archivable). This filament plugin adds an [ArchiveAction](#archiveunarchive-actions), an [UnArchiveAction](#archiveunarchive-actions) and a [ArchivedFilter](#filtering) to your resource tables. It's also possible to [add custom row-classes for archived records](#add-custom-classes-to-archived-rows).
 
 ## Installation
 
@@ -15,7 +15,7 @@ You can install the package via composer:
 composer require okeonline/filament-archivable
 ```
 
-Add the plugin to the ```AppPanelProvider```:
+Then, add the plugin to the ```AppPanelProvider```:
 
 ```php
 class AppPanelProvider extends PanelProvider
@@ -38,7 +38,7 @@ Follow his installation instructions, which -in short- instructs:
 
 ## Usage
 
-### Archive/Unarchive actions
+### Archive and Unarchive actions
 As soon as the ```Archivable```-trait from the [Laravel Archivable package](#installation) is added to the model, it is possible to add the following actions to the corresponding resource table:
 
 ```php
