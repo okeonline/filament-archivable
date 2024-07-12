@@ -127,6 +127,11 @@ public static function table(Table $table): Table
 
 -->IMG<--
 
+## Supported languages
+
+- en - English
+- nl - Dutch
+
 ## Testing
 
 ```bash

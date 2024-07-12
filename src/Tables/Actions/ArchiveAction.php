@@ -20,23 +20,21 @@ class ArchiveAction extends Action
     {
         parent::setUp();
 
-        // $this->label(__('filament-actions::delete.single.label'));
-        $this->label('Archiveren');
+        $this->label(__('filament-archivable::table.actions.archive.single.label'));
 
-        $this->modalHeading(fn (): string => __('filament-actions::delete.single.modal.heading', ['label' => $this->getRecordTitle()]));
+        $this->modalHeading(fn (): string => __('filament-archivable::table.actions.archive.single.modal.heading', ['label' => $this->getRecordTitle()]));
 
-        $this->modalSubmitActionLabel(__('filament-actions::delete.single.modal.actions.delete.label'));
+        $this->modalSubmitActionLabel(__('filament-archivable::table.actions.single.modal.actions.archive.label'));
 
-        $this->successNotificationTitle(__('filament-actions::delete.single.notifications.deleted.title'));
+        $this->successNotificationTitle(__('filament-archivable::table.actions.single.notifications.archived.title'));
 
         $this->color('warning');
 
-        // $this->icon(FilamentIcon::resolve('actions::delete-action') ?? 'heroicon-m-archive-box-arrow-down');
         $this->icon('heroicon-m-archive-box-arrow-down');
 
         $this->requiresConfirmation();
 
-        $this->modalIcon(FilamentIcon::resolve('actions::delete-action.modal') ?? 'heroicon-m-archive-box-arrow-down');
+        $this->modalIcon('heroicon-m-archive-box-arrow-down');
 
         $this->hidden(static function (Model $record): bool {
             if (! method_exists($record, 'isArchived')) {

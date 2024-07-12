@@ -20,22 +20,21 @@ class UnArchiveAction extends Action
     {
         parent::setUp();
 
-        // $this->label(__('filament-actions::restore.single.label'));
-        $this->label('Herstellen');
+        $this->label(__('filament-archivable::table.actions.unarchive.single.label'));
 
-        $this->modalHeading(fn (): string => __('filament-actions::restore.single.modal.heading', ['label' => $this->getRecordTitle()]));
+        $this->modalHeading(fn (): string => __('filament-archivable::table.actions.unarchive.single.modal.heading', ['label' => $this->getRecordTitle()]));
 
-        $this->modalSubmitActionLabel(__('filament-actions::restore.single.modal.actions.restore.label'));
+        $this->modalSubmitActionLabel(__('filament-archivable::table.actions.unarchive.single.modal.actions.unarchive.label'));
 
-        $this->successNotificationTitle(__('filament-actions::restore.single.notifications.restored.title'));
+        $this->successNotificationTitle(__('filament-archivable::table.actions.unarchive.single.notifications.unarchived.title'));
 
         $this->color('gray');
 
-        $this->icon(FilamentIcon::resolve('actions::restore-action') ?? 'heroicon-m-arrow-uturn-left');
+        $this->icon('heroicon-m-arrow-uturn-left');
 
         $this->requiresConfirmation();
 
-        $this->modalIcon(FilamentIcon::resolve('actions::restore-action.modal') ?? 'heroicon-o-arrow-uturn-left');
+        $this->modalIcon('heroicon-o-arrow-uturn-left');
 
         $this->action(function (Model $record): void {
             if (! method_exists($record, 'unArchive')) {
