@@ -17,7 +17,6 @@ use Illuminate\Database\Schema\Blueprint;
 use Livewire\LivewireServiceProvider;
 use Okeonline\FilamentArchivable\FilamentArchivableServiceProvider;
 use Okeonline\FilamentArchivable\Tests\TestModels\User;
-use Okeonline\FilamentArchivable\Tests\TestResources\PanelProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
 use RyanChandler\BladeCaptureDirective\BladeCaptureDirectiveServiceProvider;
 

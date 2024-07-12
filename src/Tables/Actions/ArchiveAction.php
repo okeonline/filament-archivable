@@ -50,9 +50,10 @@ class ArchiveAction extends Action
             $result = $this->process(static fn (Model $record) => $record->archive());
 
             if (! $result) {
+                // @codeCoverageIgnoreStart
                 $this->failure();
-
                 return;
+                // @codeCoverageIgnoreEnd
             }
 
             $this->success();

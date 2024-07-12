@@ -1,6 +1,6 @@
 <?php
 
-namespace Okeonline\FilamentArchivable\Tests\TestResources;
+namespace Okeonline\FilamentArchivable\Tests;
 
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -15,6 +15,10 @@ use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Okeonline\FilamentArchivable\FilamentArchivablePlugin;
+use Okeonline\FilamentArchivable\Tests\TestResources\ModelWithArchivableTraitAndCustomClassesResource;
+use Okeonline\FilamentArchivable\Tests\TestResources\ModelWithArchivableTraitAndFalseCustomClassesResource;
+use Okeonline\FilamentArchivable\Tests\TestResources\ModelWithArchivableTraitResource;
+use Okeonline\FilamentArchivable\Tests\TestResources\ModelWithoutArchivableTraitResource;
 
 class PanelProvider extends FilamentPanelProvider
 {
@@ -32,6 +36,7 @@ class PanelProvider extends FilamentPanelProvider
                 ModelWithArchivableTraitResource::class,
                 ModelWithoutArchivableTraitResource::class,
                 ModelWithArchivableTraitAndCustomClassesResource::class,
+                ModelWithArchivableTraitAndFalseCustomClassesResource::class,
             ])
             ->middleware([
                 EncryptCookies::class,

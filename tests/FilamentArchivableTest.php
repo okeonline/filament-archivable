@@ -8,6 +8,7 @@ use Okeonline\FilamentArchivable\Tables\Filters\ArchivedFilter;
 use Okeonline\FilamentArchivable\Tests\TestModels\ModelWithArchivableTrait;
 use Okeonline\FilamentArchivable\Tests\TestModels\ModelWithoutArchivableTrait;
 use Okeonline\FilamentArchivable\Tests\TestResources\ModelWithArchivableTraitAndCustomClassesResource;
+use Okeonline\FilamentArchivable\Tests\TestResources\ModelWithArchivableTraitAndFalseCustomClassesResource;
 use Okeonline\FilamentArchivable\Tests\TestResources\ModelWithArchivableTraitResource;
 use Okeonline\FilamentArchivable\Tests\TestResources\ModelWithoutArchivableTraitResource;
 
@@ -202,11 +203,10 @@ it('can set default archived-table-row classes', function () {
 
 it('can set the recordClasses specific for archived records in the table', function () {
 
-    $plugin = new FilamentArchivablePlugin();
+    FilamentArchivable::$archivedRecordClasses = null;
 
-    // expect(FilamentArchivable::$archivedRecordClasses)
-    //     ->toBeNull()
-    //     ->not()->toBe(['opacity-25']);
+    expect(FilamentArchivable::$archivedRecordClasses)
+        ->toBeNull();
 
     $modelWithArchivedAt = ModelWithArchivableTrait::factory()->count(1)->create(['archived_at' => now()]);
 
@@ -220,4 +220,30 @@ it('can set the recordClasses specific for archived records in the table', funct
 
 });
 
-it('can ignore default archived-table-row classes when specificly defined on the resource-table', function () {})->todo();
+it('can ignore default archived-table-row classes when specificly defined on the resource-table', function () {
+
+    $plugin = new FilamentArchivablePlugin();
+
+    expect(FilamentArchivable::$archivedRecordClasses)
+        ->toBeNull();
+
+    $plugin->archivedTableRowClasses(['opacity-25']);
+
+    expect(FilamentArchivable::$archivedRecordClasses)
+        ->not->toBeNull()
+        ->toBe(['opacity-25']);
+
+    $modelWithArchivedAt = ModelWithArchivableTrait::factory()->count(1)->create(['archived_at' => now()]);
+
+    // archivedRecordClasses is set to false in @see ModelWithArchivableTraitAndCustomClassesResource
+    livewire(ModelWithArchivableTraitAndFalseCustomClassesResource\Pages\ListPage::class)
+        ->filterTable(ArchivedFilter::class, true)
+        ->assertSuccessful()
+        ->assertCanSeeTableRecords($modelWithArchivedAt)
+        ->assertCountTableRecords(1)
+        ->assertTableActionExists(UnArchiveAction::class)
+        ->assertTableActionDoesNotExist(ArchiveAction::class)
+        ->assertDontSee('opacity-25')
+        ->assertDontSee('bg-red-300');
+
+});

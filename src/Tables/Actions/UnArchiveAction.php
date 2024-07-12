@@ -39,17 +39,19 @@ class UnArchiveAction extends Action
 
         $this->action(function (Model $record): void {
             if (! method_exists($record, 'unArchive')) {
+                // @codeCoverageIgnoreStart
                 $this->failure();
-
                 return;
+                // @codeCoverageIgnoreEnd
             }
 
             $result = $this->process(static fn () => $record->unArchive());
 
             if (! $result) {
+                // @codeCoverageIgnoreStart
                 $this->failure();
-
                 return;
+                // @codeCoverageIgnoreEnd
             }
 
             $this->success();
