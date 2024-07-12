@@ -31,6 +31,7 @@ class PanelProvider extends FilamentPanelProvider
             ->resources([
                 ModelWithArchivableTraitResource::class,
                 ModelWithoutArchivableTraitResource::class,
+                ModelWithArchivableTraitAndCustomClassesResource::class,
             ])
             ->middleware([
                 EncryptCookies::class,

@@ -35,7 +35,9 @@ class FilamentArchivablePlugin implements Plugin
         });
     }
 
+    // @codeCoverageIgnoreStart
     public function boot(Panel $panel): void {}
+    // @codeCoverageIgnoreEnd
 
     public function archivedTableRowClasses(string|array $classes): static
     {

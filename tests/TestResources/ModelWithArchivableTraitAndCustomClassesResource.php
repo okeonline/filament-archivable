@@ -10,14 +10,15 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Okeonline\FilamentArchivable\Tables\Actions\ArchiveAction;
 use Okeonline\FilamentArchivable\Tables\Actions\UnArchiveAction;
-use Okeonline\FilamentArchivable\Tests\TestModels\ModelWithoutArchivableTrait;
-use Okeonline\FilamentArchivable\Tests\TestResources\ModelWithoutArchivableTraitResource\Pages\ListPage;
+use Okeonline\FilamentArchivable\Tables\Filters\ArchivedFilter;
+use Okeonline\FilamentArchivable\Tests\TestModels\ModelWithArchivableTrait;
+use Okeonline\FilamentArchivable\Tests\TestResources\ModelWithArchivableTraitAndCustomClassesResource\Pages\ListPage;
 
-class ModelWithoutArchivableTraitResource extends Resource
+class ModelWithArchivableTraitAndCustomClassesResource extends Resource
 {
-    protected static ?string $model = ModelWithoutArchivableTrait::class;
+    protected static ?string $model = ModelWithArchivableTrait::class;
 
-    public static ?string $modelLabel = 'without';
+    public static ?string $modelLabel = 'with-classes';
 
     public static function form(Form $form): Form
     {
@@ -31,14 +32,14 @@ class ModelWithoutArchivableTraitResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
-            ->archivedRecordClasses(true)
+            ->archivedRecordClasses(['bg-red-300'])
             ->columns([
                 TextColumn::make('name'),
                 TextColumn::make('archived_at')
                     ->dateTime(),
             ])
             ->filters([
-                //
+                ArchivedFilter::make(),
             ])
             ->actions([
                 ArchiveAction::make(),

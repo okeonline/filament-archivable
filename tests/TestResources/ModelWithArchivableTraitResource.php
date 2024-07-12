@@ -32,6 +32,7 @@ class ModelWithArchivableTraitResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->archivedRecordClasses(true)
             ->columns([
                 TextColumn::make('name'),
                 TextColumn::make('archived_at')
