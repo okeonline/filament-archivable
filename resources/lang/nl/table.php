@@ -18,33 +18,32 @@ return [
     ],
 
     'actions' => [
-        
+
         'archive' => [
-            
+
             'single' => [
-                
+
                 'label' => 'Archiveer',
 
                 'modal' => [
-                    
+
                     'heading' => 'Archiveer :label',
 
                     'actions' => [
-                        
+
                         'archive' => [
-                            
+
                             'label' => 'Archiveren',
                         ],
-
 
                     ],
 
                 ],
 
                 'notifications' => [
-                    
+
                     'archived' => [
-                        
+
                         'title' => 'Record gearchiveerd',
                     ],
                 ],
@@ -52,19 +51,19 @@ return [
         ],
 
         'unarchive' => [
-            
+
             'single' => [
-                
+
                 'label' => 'Herstellen',
 
                 'modal' => [
-                    
+
                     'heading' => 'Herstel :label',
 
                     'actions' => [
-                        
+
                         'unarchive' => [
-                            
+
                             'label' => 'Herstellen',
                         ],
 
@@ -72,9 +71,9 @@ return [
                 ],
 
                 'notifications' => [
-                    
+
                     'unarchived' => [
-                        
+
                         'title' => 'Record hersteld',
                     ],
                 ],
