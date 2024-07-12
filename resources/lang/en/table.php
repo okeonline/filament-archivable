@@ -18,33 +18,32 @@ return [
     ],
 
     'actions' => [
-        
+
         'archive' => [
-            
+
             'single' => [
-                
+
                 'label' => 'Archive',
 
                 'modal' => [
-                    
+
                     'heading' => 'Archive :label',
 
                     'actions' => [
-                        
+
                         'archive' => [
-                            
+
                             'label' => 'Archive',
                         ],
-
 
                     ],
 
                 ],
 
                 'notifications' => [
-                    
+
                     'archived' => [
-                        
+
                         'title' => 'Record archived',
                     ],
                 ],
@@ -52,19 +51,19 @@ return [
         ],
 
         'unarchive' => [
-            
+
             'single' => [
-                
+
                 'label' => 'Unarchive',
 
                 'modal' => [
-                    
+
                     'heading' => 'Unarchive :label',
 
                     'actions' => [
-                        
+
                         'unarchive' => [
-                            
+
                             'label' => 'Unarchive',
                         ],
 
@@ -72,9 +71,9 @@ return [
                 ],
 
                 'notifications' => [
-                    
+
                     'unarchived' => [
-                        
+
                         'title' => 'Record unarchived',
                     ],
                 ],

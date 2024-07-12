@@ -3,7 +3,6 @@
 namespace Okeonline\FilamentArchivable\Tables\Actions;
 
 use Filament\Actions\Concerns\CanCustomizeProcess;
-use Filament\Support\Facades\FilamentIcon;
 use Filament\Tables\Actions\Action;
 use Illuminate\Database\Eloquent\Model;
 
