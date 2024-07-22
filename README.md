@@ -1,4 +1,4 @@
-![Filament Archivable](assets/screen-header.png)
+![Filament Archivable](https://github.com/okeonline/filament-archivable/raw/main/assets/screen-header.png)
 # Filament plugin to archive, unarchive and filter records
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/okeonline/filament-archivable.svg?style=flat-square)](https://packagist.org/packages/okeonline/filament-archivable)
@@ -74,7 +74,7 @@ class UserResource extends Resource
 
 It will show the ```ArchiveAction``` on records that aren't archived, and will show the ```UnArchiveAction``` on those which are currently archived:
 
-![Actions](assets/screen-actions.png)
+![Actions](https://github.com/okeonline/filament-archivable/raw/main/assets/screen-actions.png)
 
 > You should add **both** actions to the same table. The action itself wil determine if it should be shown on the record.
 
@@ -118,7 +118,7 @@ public static function table(Table $table): Table
 }
 ```
 
-![Filters](assets/screen-filters.png)
+![Filters](https://github.com/okeonline/filament-archivable/raw/main/assets/screen-filters.png)
 
 The ```ArchivedFilter``` will respect all options that Tenary Filters have, so check the [Tenary Filter Documentation of Filament](https://filamentphp.com/docs/3.x/tables/filters/ternary) to customize the filter.
 
@@ -135,7 +135,7 @@ public static function table(Table $table): Table
         ->archivedRecordClasses(['opacity-25']);
 }
 ```
-![Custom classes](assets/screen-classes.png)
+![Custom classes](https://github.com/okeonline/filament-archivable/raw/main/assets/screen-classes.png)
 
 ## Supported languages
 
