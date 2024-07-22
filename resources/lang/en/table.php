@@ -12,7 +12,7 @@ return [
 
             'with_archived' => 'With archived records',
 
-            'without_archived' => 'Without arcived records',
+            'without_archived' => 'Without archived records',
 
         ],
     ],
