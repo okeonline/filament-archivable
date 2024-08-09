@@ -8,10 +8,14 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
+use LaravelArchivable\Scopes\ArchivableScope;
 use Okeonline\FilamentArchivable\Tables\Actions\ArchiveAction;
 use Okeonline\FilamentArchivable\Tables\Actions\UnArchiveAction;
 use Okeonline\FilamentArchivable\Tables\Filters\ArchivedFilter;
 use Okeonline\FilamentArchivable\Tests\TestModels\ModelWithArchivableTrait;
+use Okeonline\FilamentArchivable\Tests\TestResources\ModelWithArchivableTraitResource\Pages\EditPage;
 use Okeonline\FilamentArchivable\Tests\TestResources\ModelWithArchivableTraitResource\Pages\ListPage;
 
 class ModelWithArchivableTraitResource extends Resource
@@ -51,6 +55,16 @@ class ModelWithArchivableTraitResource extends Resource
     {
         return [
             'index' => ListPage::route('/'),
+            'edit' => EditPage::route('/edit/{record}'),
         ];
+    }
+
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()
+            ->withoutGlobalScopes([
+                SoftDeletingScope::class,
+                ArchivableScope::class,
+            ]);
     }
 }

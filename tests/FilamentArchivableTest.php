@@ -1,5 +1,7 @@
 <?php
 
+use Okeonline\FilamentArchivable\Actions\ArchiveAction as ActionsArchiveAction;
+use Okeonline\FilamentArchivable\Actions\UnArchiveAction as ActionsUnArchiveAction;
 use Okeonline\FilamentArchivable\FilamentArchivable;
 use Okeonline\FilamentArchivable\FilamentArchivablePlugin;
 use Okeonline\FilamentArchivable\Tables\Actions\ArchiveAction;
@@ -19,7 +21,7 @@ it('can test', function () {
 });
 
 it('is a valid plugin', function () {
-    $plugin = new FilamentArchivablePlugin();
+    $plugin = new FilamentArchivablePlugin;
 
     expect($plugin->getId())
         ->toBe('archivable');
@@ -178,7 +180,7 @@ it('unarchives the model if UnarchiveAction is called', function () {
 });
 
 it('can set default archived-table-row classes', function () {
-    $plugin = new FilamentArchivablePlugin();
+    $plugin = new FilamentArchivablePlugin;
 
     expect(FilamentArchivable::$archivedRecordClasses)
         ->toBeNull();
@@ -222,7 +224,7 @@ it('can set the recordClasses specific for archived records in the table', funct
 
 it('can ignore default archived-table-row classes when specificly defined on the resource-table', function () {
 
-    $plugin = new FilamentArchivablePlugin();
+    $plugin = new FilamentArchivablePlugin;
 
     expect(FilamentArchivable::$archivedRecordClasses)
         ->toBeNull();
@@ -245,5 +247,80 @@ it('can ignore default archived-table-row classes when specificly defined on the
         ->assertTableActionDoesNotExist(ArchiveAction::class, record: $modelWithArchivedAt->first())
         ->assertDontSee('opacity-25')
         ->assertDontSee('bg-red-300');
+
+});
+
+it('can show archive Action on Edit page', function () {
+
+    $unArchivedModels = ModelWithArchivableTrait::factory()->count(1)->create(['archived_at' => null]);
+
+    livewire(ModelWithArchivableTraitResource\Pages\EditPage::class, ['record' => $unArchivedModels->first()->getKey()])
+        ->assertSuccessful()
+        ->assertActionExists(ActionsArchiveAction::class)
+        ->assertActionVisible(ActionsArchiveAction::class);
+
+});
+
+it('can show unarchive Action on Edit page', function () {
+
+    $archivedModels = ModelWithArchivableTrait::factory()->count(1)->create(['archived_at' => now()]);
+
+    livewire(ModelWithArchivableTraitResource\Pages\EditPage::class, ['record' => $archivedModels->first()->getKey()])
+        ->assertSuccessful()
+        ->assertActionExists(ActionsUnArchiveAction::class)
+        ->assertActionVisible(ActionsUnArchiveAction::class);
+
+});
+
+it('does not show the unarchived action on a unarchived record', function () {
+
+    $unArchivedModels = ModelWithArchivableTrait::factory()->count(1)->create(['archived_at' => null]);
+
+    livewire(ModelWithArchivableTraitResource\Pages\EditPage::class, ['record' => $unArchivedModels->first()->getKey()])
+        ->assertSuccessful()
+        ->assertActionExists(ActionsUnArchiveAction::class)
+        ->assertActionHidden(ActionsUnArchiveAction::class);
+
+});
+
+it('does not show the archive action on a archived record', function () {
+
+    $archivedModels = ModelWithArchivableTrait::factory()->count(1)->create(['archived_at' => now()]);
+
+    livewire(ModelWithArchivableTraitResource\Pages\EditPage::class, ['record' => $archivedModels->first()->getKey()])
+        ->assertSuccessful()
+        ->assertActionExists(ActionsArchiveAction::class)
+        ->assertActionHidden(ActionsArchiveAction::class);
+
+});
+
+it('can archive a model on Edit page', function () {
+
+    $unArchivedModel = ModelWithArchivableTrait::factory()->count(1)->create(['archived_at' => null])->first();
+
+    livewire(ModelWithArchivableTraitResource\Pages\EditPage::class, ['record' => $unArchivedModel->getKey()])
+        ->assertSuccessful()
+        ->assertActionVisible(ActionsArchiveAction::class)
+        ->callAction(ActionsArchiveAction::class);
+
+    $unArchivedModel->refresh();
+
+    $this->
+        assertNotNull($unArchivedModel->archived_at);
+});
+
+it('can unarchive a model on Edit page', function () {
+
+    $archivedModel = ModelWithArchivableTrait::factory()->count(1)->create(['archived_at' => now()])->first();
+
+    livewire(ModelWithArchivableTraitResource\Pages\EditPage::class, ['record' => $archivedModel->getKey()])
+        ->assertSuccessful()
+        ->assertActionVisible(ActionsUnArchiveAction::class)
+        ->callAction(ActionsUnArchiveAction::class);
+
+    $archivedModel->refresh();
+
+    $this->
+        assertNull($archivedModel->archived_at);
 
 });
