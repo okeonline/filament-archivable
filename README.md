@@ -114,11 +114,9 @@ protected function getHeaderActions(): array
 
 It will show the ```ArchiveAction``` on records that aren't archived, and will show the ```UnArchiveAction``` on those which are currently archived:
 
--->screenshot<--
-
 > Be aware that there is a difference between **table** actions and **normal (page)** actions. You can not use the page actions as a table action, vice versa. Nevertheless, the business-logic is the same. *Read [this page](https://filamentphp.com/docs/3.x/actions/overview) for more information about the difference.*
 
-> You should add **both** actions to the same page. The action itself wil determine if it should be shown on the record. Check -->internal<--- if you want to edit (and unarchive) records that are being archived.
+> You should add **both** actions to the same page. The action itself wil determine if it should be shown on the record. Check [this](#add-custom-classes-to-archived-rows) if you want to edit (and unarchive) records that are being archived.
 
 The actions are normal actions, similar to the [Delete](https://filamentphp.com/docs/3.x/actions/prebuilt-actions/delete) and [Restore](https://filamentphp.com/docs/3.x/actions/prebuilt-actions/restore) actions of FilamentPHP. You can add all features that are described in the [FilamentPHP Actions Documentation](https://filamentphp.com/docs/3.x/actions/overview), like:
 
