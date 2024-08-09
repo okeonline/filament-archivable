@@ -8,7 +8,7 @@
 
 Filament plugin for archiving and unarchiving table records (eloquent models) based on the [Laravel Archivable package by Joe Butcher](https://github.com/joelbutcher/laravel-archivable). 
 
-This filament plugin adds an [ArchiveAction](#archiveunarchive-actions), an [UnArchiveAction](#archiveunarchive-actions) and a [ArchivedFilter](#filtering) to your resource tables. It's also possible to [add custom row-classes for archived records](#add-custom-classes-to-archived-rows).
+This filament plugin adds an [ArchiveAction](#archiveunarchive-actions), an [UnArchiveAction](#archiveunarchive-actions) and a [ArchivedFilter](#filtering) to your resource tables. It's also possible to [add custom row-classes for archived records](#add-custom-classes-to-archived-rows). In addition to table-actions, the package provides also page-actions for view/edit pages to archive and unarchive your records.
 
 ## Requirements
 
@@ -48,7 +48,7 @@ Follow his installation instructions, which -in short- instructs:
 
 ## Usage
 
-### Archive and Unarchive actions
+### Archive and UnArchive table actions
 As soon as the ```Archivable```-trait from the [Laravel Archivable package](#installation) is added to the model, it is possible to add the following actions to the corresponding resource table:
 
 ```php
@@ -78,7 +78,7 @@ It will show the ```ArchiveAction``` on records that aren't archived, and will s
 
 > You should add **both** actions to the same table. The action itself wil determine if it should be shown on the record.
 
-The actions are normal table actions, similar to the [Delete](https://filamentphp.com/docs/3.x/actions/prebuilt-actions/delete) and [Restore](https://filamentphp.com/docs/3.x/actions/prebuilt-actions/restore) actions of FilamentPHP. You can add all features that are described in the [FilamentPHP Table Actions Documentation](https://filamentphp.com/docs/3.x/tables/actions), like:
+The actions are normal **table** actions, similar to the [Delete](https://filamentphp.com/docs/3.x/actions/prebuilt-actions/delete) and [Restore](https://filamentphp.com/docs/3.x/actions/prebuilt-actions/restore) table actions of FilamentPHP. You can add all features that are described in the [FilamentPHP Table Actions Documentation](https://filamentphp.com/docs/3.x/tables/actions), like:
 
 - ```hiddenLabel()```
 - ```tooltip()```
@@ -92,7 +92,47 @@ ArchiveAction::make()
     ->tooltip('Archive'),
 ```
 
-The actions call the ```$model->archive()```  and ```$model->unArchive()``` methods that are provided by the [Laravel Achivable package](https://github.com/joelbutcher/laravel-archivable?tab=readme-ov-file#extensions).
+The table actions call the ```$model->archive()```  and ```$model->unArchive()``` methods that are provided by the [Laravel Achivable package](https://github.com/joelbutcher/laravel-archivable?tab=readme-ov-file#extensions).
+
+### Archive and UnArchive page actions
+As soon as the ```Archivable```-trait from the [Laravel Archivable package](#installation) is added to the model, it is possible to add the following actions to the resource **pages**:
+
+```php
+// in e.g. Filament/PostResource/EditPage.php
+use Okeonline\FilamentArchivable\Actions\ArchiveAction;
+use Okeonline\FilamentArchivable\Actions\UnArchiveAction;
+
+// ...
+protected function getHeaderActions(): array
+{
+    return [
+        ArchiveAction::make(),
+        UnArchiveAction::make(),
+    ];
+}
+```
+
+It will show the ```ArchiveAction``` on records that aren't archived, and will show the ```UnArchiveAction``` on those which are currently archived:
+
+> Be aware that there is a difference between **table** actions and **normal (page)** actions. You can not use the page actions as a table action, vice versa. Nevertheless, the business-logic is the same. *Read [this page](https://filamentphp.com/docs/3.x/actions/overview) for more information about the difference.*
+
+> You should add **both** actions to the same page. The action itself wil determine if it should be shown on the record. Check [this](#add-custom-classes-to-archived-rows) if you want to edit (and unarchive) records that are being archived.
+
+The actions are normal actions, similar to the [Delete](https://filamentphp.com/docs/3.x/actions/prebuilt-actions/delete) and [Restore](https://filamentphp.com/docs/3.x/actions/prebuilt-actions/restore) actions of FilamentPHP. You can add all features that are described in the [FilamentPHP Actions Documentation](https://filamentphp.com/docs/3.x/actions/overview), like:
+
+- ```color()```
+- ```size()```
+- ```disabled()```
+- ```icon()```
+- ... etc.
+
+```php
+use Filament\Support\Enums\ActionSize;
+
+ArchiveAction::make()
+    ->color('success')
+    ->size(ActionSize::Large),
+```
 
 ### Filtering
 
@@ -121,6 +161,26 @@ public static function table(Table $table): Table
 ![Filters](https://github.com/okeonline/filament-archivable/raw/main/assets/screen-filters.png)
 
 The ```ArchivedFilter``` will respect all options that Tenary Filters have, so check the [Tenary Filter Documentation of Filament](https://filamentphp.com/docs/3.x/tables/filters/ternary) to customize the filter.
+
+#### Ability to view/edit/delete archived records
+If you want to be able to view/edit/delete archived records, you should disable the global ```ArchivedScope::class``` on your resource ``` getEloquentQuery()``` method:
+
+```php
+// in your resource:
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
+use LaravelArchivable\Scopes\ArchivableScope; 
+
+public static function getEloquentQuery(): Builder
+{
+    return parent::getEloquentQuery()
+        ->withoutGlobalScopes([
+            SoftDeletingScope::class, // only if soft deleting is also active, otherwise it can be ommitted
+            ArchivableScope::class,
+        ]);
+}
+```
+See [Disabeling global scopes on Filament](https://filamentphp.com/docs/3.x/panels/resources/getting-started#disabling-global-scopes) for more information about the default resource query.
 
 ### Add custom classes to archived rows
 
