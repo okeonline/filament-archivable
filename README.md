@@ -13,7 +13,7 @@ This filament plugin adds an [ArchiveAction](#archiveunarchive-actions), an [UnA
 ## Requirements
 
 - PHP ^8.3
-- Laravel ^11.0
+- Laravel ^11.0 or ^12.0
 - Filament ^3.0
 - Laravel Archivable ^1.4 (installed with this plugin)
 
